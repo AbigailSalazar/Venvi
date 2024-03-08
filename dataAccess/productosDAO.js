@@ -16,7 +16,10 @@ class ProductoDAO {
 
     async obtenerProductoPorId(id) {
         try {
-            return await Producto.findById(id)
+            if(id){
+                return await Producto.findById(id)
+            }
+            else throw Error('Error al obtener producto: id nulo')
         } catch (error) {
             throw error
         }
