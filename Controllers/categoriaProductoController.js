@@ -78,13 +78,13 @@ class CategoriaProductoController {
             const categoriaProductoExist = await categoriaProductoDAO.obtenerCategoriaProductoPorId(id)
 
             if (!categoriaProductoExist) {
-                next(new AppError('Categoria no encontrado', 404))
+                next(new AppError('Categoria no encontrada', 404))
             }
 
             const categoriaProductoData = req.body;
             const categoriaProducto = await categoriaProductoDAO.actualizarCategoriaProducto(id, categoriaProductoData)
             if (!categoriaProducto) {
-                next(new AppError('Producto no encontrado'))
+                next(new AppError('Categoria no encontrada'))
             }
             res.status(200).json(categoriaProducto)
 
@@ -105,7 +105,7 @@ class CategoriaProductoController {
             }
 
             await categoriaProductoDAO.eliminarCategoriaProductoPorId(id);
-            res.status(200).json("Eliminado con exito")
+            res.status(200).json("Eliminada con exito")
 
         } catch (error) {
             next(new AppError('Error al eliminar la categoria', 500))
