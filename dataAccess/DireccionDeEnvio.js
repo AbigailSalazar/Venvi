@@ -43,7 +43,7 @@ class DireccionDeEnvioDAO {
     // Método para eliminar una dirección de envío por su ID
     static async eliminarDireccion(direccionId) {
         try {
-            await DireccionDeEnvio.findByIdAndDelete(direccionId);
+            await DireccionDeEnvio.findByIdAndDelete({ _id: direccionId });
         } catch (error) {
             throw new Error('Error al eliminar la dirección de envío: ' + error.message);
         }

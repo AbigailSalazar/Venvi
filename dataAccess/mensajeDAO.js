@@ -42,7 +42,7 @@ class MensajeDAO{
     //Metodo para eliminar un mensaje por ID
     static async eliminarMensaje(mensajeId){
         try{
-            await Mensaje.findByIdAndDelete(mensajeId);
+            await Mensaje.findByIdAndDelete({ _id: mensajeId });
         }catch(error){
             throw new Error('Error al eliminar mensaje: '+ error.message);
         }

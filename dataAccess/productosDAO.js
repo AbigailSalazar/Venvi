@@ -83,7 +83,7 @@ class ProductoDAO {
 
     async eliminarProductoPorId(id){
         try {
-            return await Producto.findOneAndDelete(id)
+            return await Producto.findOneAndDelete({ _id: id })
         } catch (error) {
             throw error;
         }

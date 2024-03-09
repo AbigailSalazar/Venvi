@@ -65,7 +65,7 @@ class UsuarioDAO {
 
     async eliminarUsuarioPorId(id){
         try {
-            return await Usuario.findOneAndDelete(id)
+            return await Usuario.findOneAndDelete({ _id: id })
         } catch (error) {
             throw error;
         }

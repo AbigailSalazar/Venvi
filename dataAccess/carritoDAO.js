@@ -39,7 +39,7 @@ class CarritoDAO {
     // Método para eliminar un carrito por su ID
     static async eliminarCarrito(carritoId) {
         try {
-            await Carrito.findByIdAndDelete(carritoId);
+            await Carrito.findByIdAndDelete({ _id: carritoId });
         } catch (error) {
             throw new Error('Error al eliminar el carrito: ' + error.message);
         }
