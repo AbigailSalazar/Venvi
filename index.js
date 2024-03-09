@@ -5,6 +5,7 @@ const {globalErrorHandler,AppError} = require('./utils/appError')
 require('dotenv').config({path:'./variables.env'})
 const db = require('./config/db');
 const productoRouter= require('./routes/productoRouter')
+const categoriaRouter = require('./routes/categoriaProductoRouter')
 const bodyParser = require('body-parser');
 
 db.conectar();
@@ -13,6 +14,7 @@ app.use(bodyParser.json());
 app.use(express.json())
 app.use(morgan('combined'))
 
+app.use('/api/categorias',categoriaRouter)
 app.use('/api/productos',productoRouter)
 
 app.all('*',(res,req,next)=>{

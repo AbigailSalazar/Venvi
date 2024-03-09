@@ -161,7 +161,7 @@ class ProductoController {
             }
 
             await productoDAO.eliminarProductoPorId(id);
-            res.status(200)
+            res.status(200).json("Eliminado con exito")
 
         } catch (error) {
             next(new AppError('Error al eliminar producto', 500))
