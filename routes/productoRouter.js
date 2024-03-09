@@ -5,6 +5,7 @@ const router = express.Router();
 router.get('/search',ProductoController.obtenerPorductosPorNombre);
 router.get('/categorias/:categoria',ProductoController.obtenerPorductosPorCategoria);
 router.get('/:id',ProductoController.obtenerPorductoPorId);
+router.get('/vendedores/:idVendedor',ProductoController.obtenerPorductosPorVendedor);
 router.get('/',ProductoController.obtenerPorductos);
 
 router.post('/',ProductoController.crearProducto);

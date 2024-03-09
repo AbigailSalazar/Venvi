@@ -49,13 +49,28 @@ class ProductoController {
         }
     }
 
+    static async obtenerPorductosPorVendedor(req, res, next) {
+        try {
+            const idVendedor = req.params.idVendedor;
+            const productos = await productoDAO.obtenerProductosPorIdVendedor(idVendedor)
+
+            if (!productos) {
+                next(new AppError('Productos no encontrados'), 404)
+            }
+            res.status(200).json(productos)
+
+        } catch (error) {
+            next(new AppError('Error al buscar productos', 500))
+        }
+    }
+
     static async obtenerPorductosPorCategoria(req, res, next) {
         try {
             const categoria = req.params.categoria;
             const productos = await productoDAO.obtenerProductosPorCategoria(categoria)
 
             if (!productos) {
-                next(new AppError('Productos no encontrado'), 404)
+                next(new AppError('Productos no encontrados'), 404)
             }
             res.status(200).json(productos)
 
