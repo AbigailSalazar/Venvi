@@ -2,6 +2,7 @@ const express = require('express')
 const UsuarioController =require('../Controllers/usuariosController')
 const router = express.Router();
 
+router.post('/autenticar',UsuarioController.autenticarUsuario);
 router.get('/search',UsuarioController.obtenerUsuarioPorNombre);
 router.get('/:id',UsuarioController.obtenerUsuarioPorId);
 router.get('/',UsuarioController.obtenerUsuarios);

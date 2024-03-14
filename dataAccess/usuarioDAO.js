@@ -30,6 +30,14 @@ class UsuarioDAO {
         }
     }
 
+    async obtenerUsuarioPorCorreo(correoBuscado) {
+        try {
+            return await Usuario.findOne({correo:correoBuscado})
+        } catch (error) {
+            throw error
+        }
+    }
+
     async obtenerUsuarios(){
         try {
             return await Usuario.find({})

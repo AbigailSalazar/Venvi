@@ -3,6 +3,26 @@ const usuarioDAO = require('../dataAccess/usuarioDAO')
 const { AppError } = require('../utils/appError');
 
 class UsuarioController {
+
+    static async autenticarUsuario(req, res, next) {
+        try {
+            const {correo,password} = req.body;
+            const usuario = await usuarioDAO.obtenerUsuarioPorCorreo(correo)
+
+            if (!usuario) {
+                next(new AppError('Contraseña o correo incorrectos'), 404)
+            }
+            else if(usuario.password===password){
+                 res.status(200).json(usuario)
+            }
+           else{
+                 next(new AppError('Contraseña o correo incorrectos'), 404)
+           }
+        } catch (error) {
+            next(new AppError("Error al aurorizar al usuario", 500))
+        }
+    }
+
     static async crearUsuario(req, res, next) {
         try {
             const { nombre, password, correo } = req.body;

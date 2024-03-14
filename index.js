@@ -21,7 +21,7 @@ app.use('/api/usuarios',usuarioRouter)
 
 app.all('*',(res,req,next)=>{
     const error = new AppError(`No se pudo acceder a la ruta: ${req.originalUrl} en el servicio web`)
-
+    next(error)
 })
 
 app.use(globalErrorHandler)

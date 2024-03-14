@@ -42,3 +42,10 @@
 {"level":"error","message":"Usuario no encontrado"}
 {"level":"error","message":"Producto no encontrado"}
 {"level":"error","message":"Producto no encontrado"}
+{"level":"error","message":"res.json is not a function"}
+{"level":"error","message":"res.status is not a function"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"Contraseña o correo incorrectos"}
+{"level":"error","message":"Contraseña o correo incorrectos"}
