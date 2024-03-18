@@ -49,3 +49,15 @@
 {"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
 {"level":"error","message":"Contraseña o correo incorrectos"}
 {"level":"error","message":"Contraseña o correo incorrectos"}
+{"level":"error","message":"Error al aurorizar al usuario"}
+{"level":"error","message":"Error al aurorizar al usuario"}
+{"level":"error","message":"Error al aurorizar al usuarioExpected \"payload\" to be a plain object."}
+{"level":"error","message":"Usuario no encontrado"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"Producto no encontrado"}
+{"level":"error","message":"Producto no encontrado"}

@@ -1,4 +1,5 @@
 const usuarioDAO = require('../dataAccess/usuarioDAO')
+const jwtUtils = require('../utils/jwt')
 
 const { AppError } = require('../utils/appError');
 
@@ -6,20 +7,23 @@ class UsuarioController {
 
     static async autenticarUsuario(req, res, next) {
         try {
-            const {correo,password} = req.body;
+            const { correo, password } = req.body;
             const usuario = await usuarioDAO.obtenerUsuarioPorCorreo(correo)
 
             if (!usuario) {
                 next(new AppError('Contraseña o correo incorrectos'), 404)
             }
-            else if(usuario.password===password){
-                 res.status(200).json(usuario)
+            else if (usuario.password === password) {
+                const userData = { id: usuario._id, nombre: usuario.nombre, correo: usuario.correo }
+                const token = jwtUtils.generateToken(userData);
+                res.json({ token });
+
             }
-           else{
-                 next(new AppError('Contraseña o correo incorrectos'), 404)
-           }
+            else {
+                next(new AppError('Contraseña o correo incorrectos'), 401)
+            }
         } catch (error) {
-            next(new AppError("Error al aurorizar al usuario", 500))
+            next(new AppError("Error al aurorizar al usuario" + error.message, 500))
         }
     }
 
@@ -114,7 +118,7 @@ class UsuarioController {
                 next(new AppError('Usuario no encontrado', 404))
             }
 
-            const {foto} = req.body;
+            const { foto } = req.body;
             if (foto) {
                 const usuario = await usuarioDAO.actualizarFoto(id, foto)
                 if (!usuario) {
@@ -138,7 +142,7 @@ class UsuarioController {
                 next(new AppError('Usuario no encontrado', 404))
             }
 
-            const { rating} = req.body;
+            const { rating } = req.body;
             if (rating) {
                 const usuario = await usuarioDAO.actualizarRating(id, rating)
                 if (!usuario) {
