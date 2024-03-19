@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const ventasSchema = new mongoose.Schema({
-    IdComprador: {
+    IdUsuario: {
         type: mongoose.Schema.Types.ObjectId,
         ref:'Usuario'
     },
