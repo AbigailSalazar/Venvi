@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express();
 const morgan = require('morgan')
+const cors = require('cors');
 const { globalErrorHandler, AppError } = require('./utils/appError')
 require('dotenv').config({ path: './variables.env' })
 const db = require('./config/db');
@@ -9,20 +10,21 @@ const categoriaRouter = require('./routes/categoriaProductoRouter')
 const usuarioRouter = require('./routes/usuarioRouter')
 const bodyParser = require('body-parser');
 
-const carritoRoutes = require('.routes/carritoRoutes');
-const direccionDeEnvioRoutes = require('./routes/DireccionDeEnvioRoutes');
+//const carritoRoutes = require('./routes/CarritoRoutes');
+//const direccionDeEnvioRoutes = require('./routes/DireccionDeEnvioRoutes');
 
 db.conectar();
 
 app.use(bodyParser.json());
 app.use(express.json())
 app.use(morgan('combined'))
+app.use(cors())
 
 app.use('/api/categorias', categoriaRouter)
 app.use('/api/productos', productoRouter)
 app.use('/api/usuarios', usuarioRouter)
-app.use('/api', carritoRoutes);
-app.use('/api', direccionDeEnvioRoutes);
+// app.use('/api', carritoRoutes);
+// app.use('/api', direccionDeEnvioRoutes);
 
 app.all('*', (res, req, next) => {
     const error = new AppError(`No se pudo acceder a la ruta: ${req.originalUrl} en el servicio web`)

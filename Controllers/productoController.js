@@ -104,9 +104,6 @@ class ProductoController {
 
             const productoData = req.body;
             const producto = await productoDAO.actualizarProducto(id, productoData)
-            if (!producto) {
-                next(new AppError('Producto no encontrado'))
-            }
             res.status(200).json(producto)
 
         } catch (error) {

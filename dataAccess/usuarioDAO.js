@@ -1,4 +1,5 @@
 const Usuario = require('../models/Usuario')
+const multimediaDAO = require('../dataAccess/multimediaDAO')
 
 class UsuarioDAO {
     constructor() {
@@ -7,9 +8,16 @@ class UsuarioDAO {
 
     async crearUsuario(usuarioData) {
         try {
-            const usuario = new Usuario(usuarioData)
-            return await usuario.save();
+            const foto=usuarioData.foto
+            console.log('FOTO:'+foto.name);
+            usuarioData.foto=""
+            const usuario = new Usuario(usuarioData);
+            const newUser = await usuario.save();
+            await multimediaDAO.agregarImgUsuario(newUser._id, foto); // guardar imagen de perfil si se registró correctamente
+            await this.actualizarFoto(newUser._id, "");
+            return newUser;
         } catch (error) {
+            console.log(error);
             throw error
         }
     }

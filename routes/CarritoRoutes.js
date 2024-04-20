@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const carritoController = require('./carritoController');
+const carritoController = require('../Controllers/carritoController');
 
 // Rutas para la entidad Carrito
 router.post('/carritos', carritoController.crearCarrito);
