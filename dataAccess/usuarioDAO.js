@@ -1,20 +1,20 @@
 const Usuario = require('../models/Usuario')
-const multimediaDAO = require('../dataAccess/multimediaDAO')
+const multimediaDAO = require('../dataAccess/multimediaDAO');
+const convertirImagen = require('../utils/convertirImagen');
 
 class UsuarioDAO {
     constructor() {
 
     }
 
-    async crearUsuario(usuarioData) {
+    async crearUsuario(usuarioData,foto) {
         try {
-            const foto=usuarioData.foto
-            console.log('FOTO:'+foto.name);
-            usuarioData.foto=""
             const usuario = new Usuario(usuarioData);
             const newUser = await usuario.save();
-            await multimediaDAO.agregarImgUsuario(newUser._id, foto); // guardar imagen de perfil si se registró correctamente
-            await this.actualizarFoto(newUser._id, "");
+            if (foto) {
+                const fotoURL = await multimediaDAO.agregarImgUsuario(newUser._id, foto); // guardar imagen de perfil si se registró correctamente
+                await this.actualizarFoto(newUser._id, fotoURL);
+            }
             return newUser;
         } catch (error) {
             console.log(error);
@@ -32,7 +32,7 @@ class UsuarioDAO {
 
     async obtenerUsuarioPorNombre(nombreBuscado) {
         try {
-            return await Usuario.findOne({nombre:nombreBuscado})
+            return await Usuario.findOne({ nombre: nombreBuscado })
         } catch (error) {
             throw error
         }
@@ -40,13 +40,13 @@ class UsuarioDAO {
 
     async obtenerUsuarioPorCorreo(correoBuscado) {
         try {
-            return await Usuario.findOne({correo:correoBuscado})
+            return await Usuario.findOne({ correo: correoBuscado })
         } catch (error) {
             throw error
         }
     }
 
-    async obtenerUsuarios(){
+    async obtenerUsuarios() {
         try {
             return await Usuario.find({})
         } catch (error) {
@@ -54,32 +54,32 @@ class UsuarioDAO {
         }
     }
 
-    
-    async actualizarUsuario(id,usuario){
+
+    async actualizarUsuario(id, usuario) {
         try {
-            return await Usuario.findByIdAndUpdate(id,usuario, {new:true})
+            return await Usuario.findByIdAndUpdate(id, usuario, { new: true })
         } catch (error) {
             throw error;
         }
     }
 
-    async actualizarRating(id,nuevoRating){
+    async actualizarRating(id, nuevoRating) {
         try {
-            return await Usuario.findByIdAndUpdate(id,{rating:nuevoRating}, {new:true})
+            return await Usuario.findByIdAndUpdate(id, { rating: nuevoRating }, { new: true })
         } catch (error) {
             throw error;
         }
     }
 
-    async actualizarFoto(id,nuevaFoto){
+    async actualizarFoto(id, nuevaFoto) {
         try {
-            return await Usuario.findByIdAndUpdate(id,{foto:nuevaFoto}, {new:true})
+            return await Usuario.findByIdAndUpdate(id, { foto: nuevaFoto }, { new: true })
         } catch (error) {
             throw error;
         }
     }
 
-    async eliminarUsuarioPorId(id){
+    async eliminarUsuarioPorId(id) {
         try {
             return await Usuario.findOneAndDelete({ _id: id })
         } catch (error) {
@@ -88,4 +88,4 @@ class UsuarioDAO {
     }
 
 }
-module.exports=new UsuarioDAO()
+module.exports = new UsuarioDAO()

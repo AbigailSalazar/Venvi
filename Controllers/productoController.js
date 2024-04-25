@@ -8,6 +8,7 @@ class ProductoController {
             const { idVendedor, nombre, fotos, precio, cantidadDisponible } = req.body;
             if (!idVendedor, !fotos, !nombre || !precio || !cantidadDisponible) {
                 next(new AppError('Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos'))
+                return;
             }
 
             const productoData = req.body
@@ -15,7 +16,7 @@ class ProductoController {
             res.status(201).json(producto)
 
         } catch (error) {
-            next(new AppError('Error al crear producto', 500))
+            next(new AppError('Error al crear producto: '+error.message, 500))
         }
     }
 

@@ -2,7 +2,8 @@ const express = require('express')
 const UsuarioController =require('../Controllers/usuariosController')
 const jwtUtils = require('../utils/jwt')
 const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 const router = express.Router();
 
 router.post('/autenticar',UsuarioController.autenticarUsuario);

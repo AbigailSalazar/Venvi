@@ -1,6 +1,7 @@
 const firebaseApp = require('firebase/app');
-const {getStorage,ref,uploadBytesResumable} = require('firebase/storage');
+const { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL } = require('firebase/storage');
 require('dotenv').config();
+const ConvertirImagen = require('../utils/convertirImagen.js');
 
 class MultimediaDAO {
 
@@ -26,26 +27,28 @@ class MultimediaDAO {
 
     async agregarImgUsuario(idUsuario, file) {
         const metadata = {
-            contentType: file.type,
+            contentType: file.mimetype,
           };
-        const storageRef =ref(this.storage, this.usuariosRef+idUsuario+"/"+file.name);
-        console.log('guardando foto');
+        const storageRef =ref(this.storage, this.usuariosRef+idUsuario);
+        console.log('guardando foto',file);
         // 'file' comes from the Blob or File API
-        uploadBytesResumable(storageRef, file,metadata).then((snapshot) => {
-            console.log('foto de perfil subida!');
-        });
+        const snapshot = await uploadBytesResumable(storageRef, file.buffer,metadata)
+        const downloadURL = await getDownloadURL(snapshot.ref)
+        return downloadURL //regresar dirección de la imagen guardada
+
     }
 
-    async agregarImgProducto(idProducto,file) {
+    async agregarImgProducto(idProducto, file) {
         const metadata = {
-            contentType: file.type,
+            contentType: file.mimetype,
           };
-        const storageRef =ref(this.storage, this.productosRef+idProducto);
-
+        const storageRef =ref(this.storage, this.usuariosRef+idProducto+"/"+file.originalname);
+        console.log('guardando foto',file);
         // 'file' comes from the Blob or File API
-        uploadBytes(storageRef, file,metadata).then((snapshot) => {
-            console.log('foto de perfil subida!');
-        });
+        const snapshot = await uploadBytesResumable(storageRef, file.buffer,metadata)
+        const downloadURL = await getDownloadURL(snapshot.ref)
+        return downloadURL //regresar dirección de la imagen guardada
+
     }
 
 
@@ -59,4 +62,4 @@ class MultimediaDAO {
 
 }
 
-module.exports= new MultimediaDAO
+module.exports = new MultimediaDAO

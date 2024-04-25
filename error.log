@@ -81,3 +81,38 @@
 {"level":"error","message":"Error al crear el usuario"}
 {"level":"error","message":"Error al crear el usuario"}
 {"level":"error","message":"Contraseña o correo incorrectos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"Error al eliminar producto"}
+{"level":"error","message":"Cast to ObjectId failed for value \"null\" (type string) at path \"_id\" for model \"Producto\""}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"request entity too large"}
+{"level":"error","message":"Error al crear el usuario"}
+{"level":"error","message":"Error al crear el usuario"}
+{"level":"error","message":"Error al crear el usuario"}
+{"level":"error","message":"Error al crear el usuario"}
+{"level":"error","message":"Error al crear el usuario"}
+{"level":"error","message":"Error al crear el usuario"}
+{"level":"error","message":"Error al crear el usuario TypeError: Cannot destructure property 'foto' of 'req.file' as it is undefined."}
+{"level":"error","message":"Multipart: Boundary not found"}
+{"level":"error","message":"Los campos nombre, password y correo son requeridos"}
+{"level":"error","message":"Contraseña o correo incorrectos"}
+{"level":"error","message":"Contraseña o correo incorrectos"}
+{"level":"error","message":"Error al crear el usuario"}
+{"level":"error","message":"Error al crear el usuario"}
+{"level":"error","message":"Error al crear el usuario"}

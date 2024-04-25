@@ -14,7 +14,7 @@ class UsuarioController {
                 next(new AppError('Contraseña o correo incorrectos'), 404)
             }
             else if (usuario.password === password) {
-                const userData = { id: usuario._id, nombre: usuario.nombre, correo: usuario.correo }
+                const userData = { id: usuario._id, nombre: usuario.nombre, correo: usuario.correo, foto:usuario.foto }
                 const token = jwtUtils.generateToken(userData);
                 res.json({ token });
 
@@ -28,6 +28,19 @@ class UsuarioController {
     }
 
     static async crearUsuario(req, res, next) {
+        // try {
+        //     const { nombre, password, correo } = req.body;
+        //     if (!nombre, !password, !correo) {
+        //         next(new AppError('Los campos nombre, password y correo son requeridos'))
+        //     }
+
+        //     const usuarioData = req.body
+        //     const usuario = await usuarioDAO.crearUsuario(usuarioData);
+        //     res.status(201).json(usuario)
+
+        // } catch (error) {
+        //     next(new AppError('Error al crear el usuario', 500))
+        // }
         try {
             const { nombre, password, correo } = req.body;
             if (!nombre, !password, !correo) {
@@ -35,7 +48,8 @@ class UsuarioController {
             }
 
             const usuarioData = req.body
-            const usuario = await usuarioDAO.crearUsuario(usuarioData);
+            const foto = req.file
+            const usuario = await usuarioDAO.crearUsuario(usuarioData,foto);
             res.status(201).json(usuario)
 
         } catch (error) {
