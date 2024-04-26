@@ -26,9 +26,23 @@ class ProductoDAO {
         }
     }
 
+    async obtenerPorRangoPrecio(min,max){
+        try {
+            return await Producto.find({precio:{
+                $gte: min, 
+                $lte: max 
+              }})
+        } catch (error) {
+            throw error
+        }
+    
+    }
+
     async obtenerProductosPorNombre(nombreBuscado) {
         try {
-            return await Producto.find({nombre:nombreBuscado})
+            const palabrasABuscarArray = nombreBuscado.split(' ')
+            const regex = new RegExp(palabrasABuscarArray.join('.*'), 'i');
+            return await Producto.find({nombre:regex})
         } catch (error) {
             throw error
         }

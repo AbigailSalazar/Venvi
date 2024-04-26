@@ -16,7 +16,7 @@ class ProductoController {
             res.status(201).json(producto)
 
         } catch (error) {
-            next(new AppError('Error al crear producto: '+error.message, 500))
+            next(new AppError('Error al crear producto: ' + error.message, 500))
         }
     }
 
@@ -46,7 +46,7 @@ class ProductoController {
             res.status(200).json(productos)
 
         } catch (error) {
-            next(new AppError('Error al buscar producto', 500))
+            next(new AppError('Error al buscar producto' + error.message, 500))
         }
     }
 
@@ -80,106 +80,126 @@ class ProductoController {
         }
     }
 
-    static async obtenerPorductos(req, res, next) {
+    static async obtenerPorductosPorPrecio(req, res, next) {
         try {
-            const productos = await productoDAO.obtenerProductos()
+            const min = parseFloat(req.query.min);
+            const max = parseFloat(req.query.max);
+            console.log('obteniendo por rango:' + min + "," + max);
+            if (!isNaN(min) && !isNaN(max)){
+               
+            const productos = await productoDAO.obtenerPorRangoPrecio(min, max)
+
             if (!productos) {
-                next(new AppError('No hay productos'))
+                next(new AppError('Productos no encontrados'), 404)
             }
             res.status(200).json(productos)
-
-        } catch (error) {
-            next(new AppError('Error al obtener productos', 500))
         }
+
+        } catch(error) {
+        next(new AppError('Error al buscar productos', 500))
     }
+}
+
+    static async obtenerPorductos(req, res, next) {
+    try {
+        const productos = await productoDAO.obtenerProductos()
+        if (!productos) {
+            next(new AppError('No hay productos'))
+        }
+        res.status(200).json(productos)
+
+    } catch (error) {
+        next(new AppError('Error al obtener productos', 500))
+    }
+}
 
     static async actualizarProducto(req, res, next) {
-        try {
-            const id = req.params.id
+    try {
+        const id = req.params.id
 
-            const productoExist = await productoDAO.obtenerProductoPorId(id)
+        const productoExist = await productoDAO.obtenerProductoPorId(id)
 
-            if (!productoExist) {
-                next(new AppError('Producto no encontrado', 404))
-            }
-
-            const productoData = req.body;
-            const producto = await productoDAO.actualizarProducto(id, productoData)
-            res.status(200).json(producto)
-
-        } catch (error) {
-            next(new AppError('Error al actualizar el producto', 500))
+        if (!productoExist) {
+            next(new AppError('Producto no encontrado', 404))
         }
+
+        const productoData = req.body;
+        const producto = await productoDAO.actualizarProducto(id, productoData)
+        res.status(200).json(producto)
+
+    } catch (error) {
+        next(new AppError('Error al actualizar el producto', 500))
     }
+}
 
 
     static async actualizarFoto(req, res, next) {
-        try {
-            const id = req.params.id
+    try {
+        const id = req.params.id
 
-            const productoExist = await productoDAO.obtenerProductoPorId(id)
+        const productoExist = await productoDAO.obtenerProductoPorId(id)
 
-            if (!productoExist) {
-                next(new AppError('Producto no encontrado', 404))
-            }
-            const  foto  = req.files;
-            console.log(foto);
-            if (foto) {
-                const producto = await productoDAO.actualizarFotos(id, foto)
-                if (!producto) {
-                    next(new AppError('Producto no encontrado'))
-                }
-                res.status(200).json(producto)
-            }
-
-        } catch (error) {
-            next(new AppError('Error al actualizar fotos del producto '+error.message, 500))
+        if (!productoExist) {
+            next(new AppError('Producto no encontrado', 404))
         }
+        const foto = req.files;
+        console.log(foto);
+        if (foto) {
+            const producto = await productoDAO.actualizarFotos(id, foto)
+            if (!producto) {
+                next(new AppError('Producto no encontrado'))
+            }
+            res.status(200).json(producto)
+        }
+
+    } catch (error) {
+        next(new AppError('Error al actualizar fotos del producto ' + error.message, 500))
     }
+}
 
     static async actualizarPrecio(req, res, next) {
-        try {
-            const id = req.params.id
+    try {
+        const id = req.params.id
 
-            const productoExist = await productoDAO.obtenerProductoPorId(id)
+        const productoExist = await productoDAO.obtenerProductoPorId(id)
 
-            if (!productoExist) {
-                next(new AppError('Producto no encontrado', 404))
-            }
-
-            const { precio } = req.body;
-
-            if (precio) {
-                const producto = await productoDAO.actualizarPrecio(id, precio)
-                if (!producto) {
-                    next(new AppError('Producto no encontrado'))
-                }
-                res.status(200).json(producto)
-            }
-
-
-        } catch (error) {
-            next(new AppError('Error al actualizar fotos del producto', 500))
+        if (!productoExist) {
+            next(new AppError('Producto no encontrado', 404))
         }
+
+        const { precio } = req.body;
+
+        if (precio) {
+            const producto = await productoDAO.actualizarPrecio(id, precio)
+            if (!producto) {
+                next(new AppError('Producto no encontrado'))
+            }
+            res.status(200).json(producto)
+        }
+
+
+    } catch (error) {
+        next(new AppError('Error al actualizar fotos del producto', 500))
     }
+}
 
     static async eliminarProducto(req, res, next) {
-        try {
-            const id = req.params.id
+    try {
+        const id = req.params.id
 
-            const productoExist = await productoDAO.obtenerProductoPorId(id)
+        const productoExist = await productoDAO.obtenerProductoPorId(id)
 
-            if (!productoExist) {
-                next(new AppError('Producto no encontrado', 404))
-            }
-
-            await productoDAO.eliminarProductoPorId(id);
-            res.status(200).json("Eliminado con exito")
-
-        } catch (error) {
-            next(new AppError('Error al eliminar producto', 500))
+        if (!productoExist) {
+            next(new AppError('Producto no encontrado', 404))
         }
+
+        await productoDAO.eliminarProductoPorId(id);
+        res.status(200).json("Eliminado con exito")
+
+    } catch (error) {
+        next(new AppError('Error al eliminar producto', 500))
     }
+}
 }
 
 module.exports = ProductoController
