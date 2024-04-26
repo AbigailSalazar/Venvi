@@ -190,3 +190,6 @@
 {"level":"error","message":"Error al buscar productonombreBuscado.join is not a function"}
 {"level":"error","message":"Error al buscar productonombreBuscado.join is not a function"}
 {"level":"error","message":"Error al buscar productonombreBuscado.join is not a function"}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Error al buscar productoCannot read properties of undefined (reading 'split')"}

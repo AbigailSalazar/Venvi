@@ -6,7 +6,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 const router = express.Router();
 
-router.get('/search',ProductoController.obtenerPorductosPorNombre);
+router.get('/search',ProductoController.obtenerPorductosPorFiltros);
 router.get('/categorias/:categoria',ProductoController.obtenerPorductosPorCategoria);
 router.get('/filtros/precio/',ProductoController.obtenerPorductosPorPrecio);
 

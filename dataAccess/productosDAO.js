@@ -48,6 +48,35 @@ class ProductoDAO {
         }
     }
 
+    async obtenerProductosByFiltros(nombre,categoria,min,max){
+        try {
+
+            let query = Producto.find();
+
+            // Aplicar filtros
+            if (nombre) {
+                const palabrasABuscarArray = nombre.split(' ')
+                const regex = new RegExp(palabrasABuscarArray.join('.*'), 'i');
+                query = query.where('nombre', regex);
+            }
+            if (min) {
+              query = query.where('precio').gte(min);
+            }
+            if (max) {
+              query = query.where('precio').lte(max);
+            }
+            if(categoria){
+                query = query.where('categorias').elemMatch({nombre: categoria })
+            }
+            // Agregar más filtros según tus necesidades
+          
+            const productos = await query.exec();
+            return productos;
+        } catch (error) {
+            throw error
+        }
+    }
+
     async obtenerProductosPorIdVendedor(idVendedorBuscado) {
         try {
             return await Producto.find({idVendedor:idVendedorBuscado})

@@ -111,8 +111,26 @@ class ProductoController {
     } catch (error) {
         next(new AppError('Error al obtener productos', 500))
     }
+
 }
 
+static async obtenerPorductosPorFiltros(req, res, next) {
+    try {
+        const min = parseFloat(req.query.min);
+        const max = parseFloat(req.query.max);
+        const categoria = req.query.categoria;
+        const nombre = req.query.nombre;
+
+        const productos = await productoDAO.obtenerProductosByFiltros(nombre,categoria,min,max)
+        if (!productos) {
+            next(new AppError('No hay productos'))
+        }
+        res.status(200).json(productos)
+
+    } catch (error) {
+        next(new AppError('Error al obtener productos', 500))
+    }
+}
     static async actualizarProducto(req, res, next) {
     try {
         const id = req.params.id
