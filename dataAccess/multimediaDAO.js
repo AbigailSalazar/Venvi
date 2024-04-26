@@ -42,7 +42,7 @@ class MultimediaDAO {
         const metadata = {
             contentType: file.mimetype,
           };
-        const storageRef =ref(this.storage, this.usuariosRef+idProducto+"/"+file.originalname);
+        const storageRef =ref(this.storage, this.productosRef+idProducto+"/"+file.originalname);
         console.log('guardando foto',file);
         // 'file' comes from the Blob or File API
         const snapshot = await uploadBytesResumable(storageRef, file.buffer,metadata)

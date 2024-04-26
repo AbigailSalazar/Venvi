@@ -122,10 +122,10 @@ class ProductoController {
             if (!productoExist) {
                 next(new AppError('Producto no encontrado', 404))
             }
-
-            const { fotos } = req.body;
-            if (fotos) {
-                const producto = await productoDAO.actualizarFotos(id, fotos)
+            const  foto  = req.files;
+            console.log(foto);
+            if (foto) {
+                const producto = await productoDAO.actualizarFotos(id, foto)
                 if (!producto) {
                     next(new AppError('Producto no encontrado'))
                 }
@@ -133,7 +133,7 @@ class ProductoController {
             }
 
         } catch (error) {
-            next(new AppError('Error al actualizar fotos del producto', 500))
+            next(new AppError('Error al actualizar fotos del producto '+error.message, 500))
         }
     }
 

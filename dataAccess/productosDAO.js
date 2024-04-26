@@ -1,4 +1,5 @@
-const Producto = require('../models/Producto')
+const Producto = require('../models/Producto');
+const multimediaDAO = require('./multimediaDAO');
 
 class ProductoDAO {
     constructor() {
@@ -67,7 +68,14 @@ class ProductoDAO {
 
     async actualizarFotos(id,nuevasFotos){
         try {
-            return await Producto.findByIdAndUpdate(id,{fotos:nuevasFotos}, {new:true})
+            if(nuevasFotos){
+                const fotosURLs=[]
+                for(const foto of nuevasFotos){
+                    const url = await multimediaDAO.agregarImgProducto(id,foto)
+                    fotosURLs.push(url)
+                }
+                return await Producto.findByIdAndUpdate(id,{ $push: { fotos: { $each: fotosURLs } } }, {new:true})
+            }
         } catch (error) {
             throw error;
         }

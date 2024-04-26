@@ -116,3 +116,67 @@
 {"level":"error","message":"Error al crear el usuario"}
 {"level":"error","message":"Error al crear el usuario"}
 {"level":"error","message":"Error al crear el usuario"}
+{"level":"error","message":"Error al crear producto: Assignment to constant variable."}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Error al crear producto: Assignment to constant variable."}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Error al crear producto: Assignment to constant variable."}
+{"level":"error","message":"Error al crear producto: Producto validation failed: categorias: Cast to embedded failed for value \"Electronicos\" (type string) at path \"categorias\" because of \"ObjectParameterError\""}
+{"level":"error","message":"Error al crear producto: Producto validation failed: categorias: Cast to embedded failed for value \"[object Object]\" (type string) at path \"categorias\" because of \"ObjectParameterError\""}
+{"level":"error","message":"Error al crear producto: Producto validation failed: categorias: Cast to embedded failed for value \"[{\"_id\":\"66272b1bcf99ef64e4180762\",\"nombre\":\"Electronicos\",\"descripcion\":\"Electronicos\",\"__v\":0}]\" (type string) at path \"categorias\" because of \"ObjectParameterError\""}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Error al crear producto: \"[object Object]\" is not valid JSON"}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"Producto no encontrado"}
+{"level":"error","message":"Producto no encontrado"}
+{"level":"error","message":"Error al actualizar fotos del producto"}
+{"level":"error","message":"Error al actualizar fotos del producto"}
+{"level":"error","message":"Error al actualizar fotos del producto Cannot destructure property 'fotos' of 'req.files' as it is undefined."}
+{"level":"error","message":"Error al actualizar fotos del producto Cast to ObjectId failed for value \"662b11b687cab2586ef58\" (type string) at path \"_id\" for model \"Producto\""}
+{"level":"error","message":"Producto no encontrado"}
+{"level":"error","message":"Error al actualizar fotos del producto foto is not defined"}
+{"level":"error","message":"Unexpected field"}
+{"level":"error","message":"Unexpected field"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"No se pudo acceder a la ruta: undefined en el servicio web"}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Error al actualizar fotos del producto Cast to ObjectId failed for value \"undefined\" (type string) at path \"_id\" for model \"Producto\""}
+{"level":"error","message":"Producto no encontrado"}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Error al actualizar fotos del producto Cast to ObjectId failed for value \"undefined\" (type string) at path \"_id\" for model \"Producto\""}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Los campos nombre y descripción son requeridos"}
+{"level":"error","message":"Los campos idVendedor, nombre, foto, precio y cantidad disponible son requeridos"}
+{"level":"error","message":"Error al actualizar fotos del producto Cast to ObjectId failed for value \"undefined\" (type string) at path \"_id\" for model \"Producto\""}

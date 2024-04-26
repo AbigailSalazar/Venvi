@@ -1,6 +1,9 @@
 const express = require('express')
 const ProductoController =require('../Controllers/productoController')
 const jwtUtils = require('../utils/jwt')
+const multer  = require('multer')
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 const router = express.Router();
 
 router.get('/search',ProductoController.obtenerPorductosPorNombre);
@@ -10,7 +13,7 @@ router.get('/vendedores/:idVendedor',ProductoController.obtenerPorductosPorVende
 router.get('/',ProductoController.obtenerPorductos);
 
 router.post('/',jwtUtils.verifyToken,ProductoController.crearProducto);
-router.patch('/:id/fotos',jwtUtils.verifyToken,ProductoController.actualizarFoto);
+router.patch('/:id/fotos',upload.array('fotos'),jwtUtils.verifyToken,ProductoController.actualizarFoto);
 router.patch('/:id/precio',jwtUtils.verifyToken,ProductoController.actualizarPrecio);
 router.put('/:id',jwtUtils.verifyToken,ProductoController.actualizarProducto);
 router.delete('/:id',jwtUtils.verifyToken,ProductoController.eliminarProducto)
