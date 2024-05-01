@@ -72,6 +72,21 @@ class UsuarioController {
         }
     }
 
+    static async obtenerPerfilUsuarioPorId(req, res, next) {
+        try {
+            const id = req.params.id;
+            const usuario = await usuarioDAO.obtenerPerfilUsuarioPorId(id)
+
+            if (!usuario) {
+                next(new AppError('Usuario no encontrado'), 404)
+            }
+            res.status(200).json(usuario)
+
+        } catch (error) {
+            next(new AppError("Error al obtener usuario", 500))
+        }
+    }
+
     static async obtenerUsuarioPorNombre(req, res, next) {
         try {
             const nombre = req.query.nombre;

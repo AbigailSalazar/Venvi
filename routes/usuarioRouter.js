@@ -9,6 +9,7 @@ const router = express.Router();
 router.post('/autenticar',UsuarioController.autenticarUsuario);
 router.get('/search',UsuarioController.obtenerUsuarioPorNombre);
 router.get('/:id',jwtUtils.verifyToken,UsuarioController.obtenerUsuarioPorId);
+router.get('/perfil/:id',UsuarioController.obtenerPerfilUsuarioPorId);
 router.get('/',UsuarioController.obtenerUsuarios);
 
 router.post('/',upload.single('foto'),UsuarioController.crearUsuario);

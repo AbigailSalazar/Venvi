@@ -30,6 +30,17 @@ class UsuarioDAO {
         }
     }
 
+    
+    async obtenerPerfilUsuarioPorId(id) {
+        try {
+            const usuario = await Usuario.findById(id)
+            usuario.password=""
+            return usuario
+        } catch (error) {
+            throw error
+        }
+    }
+
     async obtenerUsuarioPorNombre(nombreBuscado) {
         try {
             return await Usuario.findOne({ nombre: nombreBuscado })

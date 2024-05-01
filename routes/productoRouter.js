@@ -16,6 +16,7 @@ router.get('/',ProductoController.obtenerPorductos);
 
 router.post('/',jwtUtils.verifyToken,ProductoController.crearProducto);
 router.patch('/:id/fotos',upload.array('fotos'),jwtUtils.verifyToken,ProductoController.actualizarFoto);
+router.delete('/:id/fotos',jwtUtils.verifyToken,ProductoController.eliminarFotos);
 router.patch('/:id/precio',jwtUtils.verifyToken,ProductoController.actualizarPrecio);
 router.put('/:id',jwtUtils.verifyToken,ProductoController.actualizarProducto);
 router.delete('/:id',jwtUtils.verifyToken,ProductoController.eliminarProducto)

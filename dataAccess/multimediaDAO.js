@@ -1,7 +1,8 @@
 const firebaseApp = require('firebase/app');
-const { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL } = require('firebase/storage');
+const { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } = require('firebase/storage');
 require('dotenv').config();
 const ConvertirImagen = require('../utils/convertirImagen.js');
+const { refFromURL } = require('firebase/database');
 
 class MultimediaDAO {
 
@@ -28,11 +29,11 @@ class MultimediaDAO {
     async agregarImgUsuario(idUsuario, file) {
         const metadata = {
             contentType: file.mimetype,
-          };
-        const storageRef =ref(this.storage, this.usuariosRef+idUsuario);
-        console.log('guardando foto',file);
+        };
+        const storageRef = ref(this.storage, this.usuariosRef + idUsuario);
+        console.log('guardando foto', file);
         // 'file' comes from the Blob or File API
-        const snapshot = await uploadBytesResumable(storageRef, file.buffer,metadata)
+        const snapshot = await uploadBytesResumable(storageRef, file.buffer, metadata)
         const downloadURL = await getDownloadURL(snapshot.ref)
         return downloadURL //regresar dirección de la imagen guardada
 
@@ -41,23 +42,31 @@ class MultimediaDAO {
     async agregarImgProducto(idProducto, file) {
         const metadata = {
             contentType: file.mimetype,
-          };
-        const storageRef =ref(this.storage, this.productosRef+idProducto+"/"+file.originalname);
-        console.log('guardando foto',file);
+        };
+        const storageRef = ref(this.storage, this.productosRef + idProducto + "/" + file.originalname);
+        console.log('guardando foto', file);
         // 'file' comes from the Blob or File API
-        const snapshot = await uploadBytesResumable(storageRef, file.buffer,metadata)
+        const snapshot = await uploadBytesResumable(storageRef, file.buffer, metadata)
         const downloadURL = await getDownloadURL(snapshot.ref)
         return downloadURL //regresar dirección de la imagen guardada
 
     }
 
+    async deleteImg(URL) {
+        const storageRef = ref(this.storage, URL);
+        console.log(storageRef);
+        // Elimina el archivo
+        await deleteObject(storageRef);
+    }
 
     async obtenerImgUsuario(idUsuario) {
 
     }
 
-    async obtenerImgProducto(idProducto) {
-
+    async obtenerImgProducto(idProducto,name) {
+        const storageRef = ref(this.storage, this.productosRef + idProducto + "/" + name);
+        const downloadURL = await getDownloadURL(storageRef)
+        return downloadURL
     }
 
 }

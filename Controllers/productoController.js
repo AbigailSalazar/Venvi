@@ -1,3 +1,4 @@
+const multimediaDAO = require('../dataAccess/multimediaDAO');
 const productoDAO = require('../dataAccess/productosDAO')
 
 const { AppError } = require('../utils/appError');
@@ -154,7 +155,6 @@ static async obtenerPorductosPorFiltros(req, res, next) {
     static async actualizarFoto(req, res, next) {
     try {
         const id = req.params.id
-
         const productoExist = await productoDAO.obtenerProductoPorId(id)
 
         if (!productoExist) {
@@ -168,6 +168,25 @@ static async obtenerPorductosPorFiltros(req, res, next) {
                 next(new AppError('Producto no encontrado'))
             }
             res.status(200).json(producto)
+        }
+
+    } catch (error) {
+        next(new AppError('Error al actualizar fotos del producto ' + error.message, 500))
+    }
+}
+
+static async eliminarFotos(req, res, next) {
+    try {
+        const fotos = req.body.fotos
+        const id = req.params.id
+        const productoExist = await productoDAO.obtenerProductoPorId(id)
+
+        if (!productoExist) {
+            next(new AppError('Producto no encontrado', 404))
+        }
+        if (fotos) {
+            await productoDAO.eliminarFotos(id,fotos)
+            res.status(200).json("Eliminado con exito")
         }
 
     } catch (error) {

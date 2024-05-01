@@ -17,7 +17,7 @@ class ProductoDAO {
 
     async obtenerProductoPorId(id) {
         try {
-            if(id){
+            if (id) {
                 return await Producto.findById(id)
             }
             else throw Error('Error al obtener producto: id nulo')
@@ -26,29 +26,31 @@ class ProductoDAO {
         }
     }
 
-    async obtenerPorRangoPrecio(min,max){
+    async obtenerPorRangoPrecio(min, max) {
         try {
-            return await Producto.find({precio:{
-                $gte: min, 
-                $lte: max 
-              }})
+            return await Producto.find({
+                precio: {
+                    $gte: min,
+                    $lte: max
+                }
+            })
         } catch (error) {
             throw error
         }
-    
+
     }
 
     async obtenerProductosPorNombre(nombreBuscado) {
         try {
             const palabrasABuscarArray = nombreBuscado.split(' ')
             const regex = new RegExp(palabrasABuscarArray.join('.*'), 'i');
-            return await Producto.find({nombre:regex})
+            return await Producto.find({ nombre: regex })
         } catch (error) {
             throw error
         }
     }
 
-    async obtenerProductosByFiltros(nombre,categoria,min,max){
+    async obtenerProductosByFiltros(nombre, categoria, min, max) {
         try {
 
             let query = Producto.find();
@@ -60,16 +62,16 @@ class ProductoDAO {
                 query = query.where('nombre', regex);
             }
             if (min) {
-              query = query.where('precio').gte(min);
+                query = query.where('precio').gte(min);
             }
             if (max) {
-              query = query.where('precio').lte(max);
+                query = query.where('precio').lte(max);
             }
-            if(categoria){
-                query = query.where('categorias').elemMatch({nombre: categoria })
+            if (categoria) {
+                query = query.where('categorias').elemMatch({ nombre: categoria })
             }
             // Agregar más filtros según tus necesidades
-          
+
             const productos = await query.exec();
             return productos;
         } catch (error) {
@@ -79,7 +81,7 @@ class ProductoDAO {
 
     async obtenerProductosPorIdVendedor(idVendedorBuscado) {
         try {
-            return await Producto.find({idVendedor:idVendedorBuscado})
+            return await Producto.find({ idVendedor: idVendedorBuscado })
         } catch (error) {
             throw error
         }
@@ -87,13 +89,13 @@ class ProductoDAO {
 
     async obtenerProductosPorCategoria(categoria) {
         try {
-            return await Producto.find({"categorias.nombre":categoria})
+            return await Producto.find({ "categorias.nombre": categoria })
         } catch (error) {
             throw error
         }
     }
 
-    async obtenerProductos(){
+    async obtenerProductos() {
         try {
             return await Producto.find({})
         } catch (error) {
@@ -101,38 +103,54 @@ class ProductoDAO {
         }
     }
 
-    async actualizarProducto(id,producto){
+    async actualizarProducto(id, producto) {
         try {
-            return await Producto.findByIdAndUpdate(id,producto, {new:true})
+            return await Producto.findByIdAndUpdate(id, producto, { new: true })
         } catch (error) {
             throw error;
         }
     }
 
-    async actualizarFotos(id,nuevasFotos){
+    async actualizarFotos(id, nuevasFotos) {
         try {
-            if(nuevasFotos){
-                const fotosURLs=[]
-                for(const foto of nuevasFotos){
-                    const url = await multimediaDAO.agregarImgProducto(id,foto)
+            if (nuevasFotos) {
+                const fotosURLs = []
+                for (const foto of nuevasFotos) {
+                    const url = await multimediaDAO.agregarImgProducto(id, foto)
                     fotosURLs.push(url)
                 }
-                return await Producto.findByIdAndUpdate(id,{ $push: { fotos: { $each: fotosURLs } } }, {new:true})
+                return await Producto.findByIdAndUpdate(id, { $push: { fotos: { $each: fotosURLs } } }, { new: true })
             }
         } catch (error) {
             throw error;
         }
     }
 
-    async actualizarPrecio(id,nuevoPrecio){
+    async eliminarFotos(id, fotos) {
         try {
-            return await Producto.findByIdAndUpdate(id,{precio:nuevoPrecio}, {new:true})
+
+            for (const foto of fotos) {
+                await multimediaDAO.deleteImg(foto)
+            }
+            const pullQuery = { $pull: { fotos: { $in: fotos } } };
+
+            // Actualizar el producto en db
+            return await Producto.findByIdAndUpdate(id, pullQuery, { new: true });
+    
         } catch (error) {
             throw error;
         }
     }
 
-    async eliminarProductoPorId(id){
+    async actualizarPrecio(id, nuevoPrecio) {
+        try {
+            return await Producto.findByIdAndUpdate(id, { precio: nuevoPrecio }, { new: true })
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async eliminarProductoPorId(id) {
         try {
             return await Producto.findOneAndDelete({ _id: id })
         } catch (error) {
@@ -141,4 +159,4 @@ class ProductoDAO {
     }
 
 }
-module.exports=new ProductoDAO()
+module.exports = new ProductoDAO()
