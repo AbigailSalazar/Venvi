@@ -230,7 +230,7 @@ static async eliminarFotos(req, res, next) {
             next(new AppError('Producto no encontrado', 404))
         }
 
-        await productoDAO.eliminarProductoPorId(id);
+        await productoDAO.eliminarProductoPorId(id,productoExist.fotos);
         res.status(200).json("Eliminado con exito")
 
     } catch (error) {

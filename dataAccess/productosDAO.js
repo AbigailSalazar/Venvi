@@ -150,8 +150,11 @@ class ProductoDAO {
         }
     }
 
-    async eliminarProductoPorId(id) {
+    async eliminarProductoPorId(id,fotos) {
         try {
+            for (const foto of fotos) {
+                await multimediaDAO.deleteImg(foto)
+            }
             return await Producto.findOneAndDelete({ _id: id })
         } catch (error) {
             throw error;
