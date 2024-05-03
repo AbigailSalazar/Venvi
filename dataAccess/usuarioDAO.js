@@ -33,8 +33,7 @@ class UsuarioDAO {
     
     async obtenerPerfilUsuarioPorId(id) {
         try {
-            const usuario = await Usuario.findById(id)
-            usuario.password=""
+            const usuario = await Usuario.findById(id,{password:0})
             return usuario
         } catch (error) {
             throw error
@@ -43,7 +42,7 @@ class UsuarioDAO {
 
     async obtenerUsuarioPorNombre(nombreBuscado) {
         try {
-            return await Usuario.findOne({ nombre: nombreBuscado })
+            return await Usuario.findOne({ nombre: nombreBuscado },{ password: 0 })
         } catch (error) {
             throw error
         }
@@ -59,7 +58,7 @@ class UsuarioDAO {
 
     async obtenerUsuarios() {
         try {
-            return await Usuario.find({})
+            return await Usuario.find({},{ password: 0 })
         } catch (error) {
             throw error;
         }

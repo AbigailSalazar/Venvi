@@ -2,6 +2,7 @@ const usuarioDAO = require('../dataAccess/usuarioDAO')
 const jwtUtils = require('../utils/jwt')
 
 const { AppError } = require('../utils/appError');
+const encriptador  = require('../utils/encriptador');
 
 class UsuarioController {
 
@@ -9,11 +10,12 @@ class UsuarioController {
         try {
             const { correo, password } = req.body;
             const usuario = await usuarioDAO.obtenerUsuarioPorCorreo(correo)
-
+            const passwDesencriptado=encriptador.desencriptar(usuario.password)
             if (!usuario) {
                 next(new AppError('Contraseña o correo incorrectos'), 404)
             }
-            else if (usuario.password === password) {
+            
+            else if (passwDesencriptado === password) {
                 const userData = { id: usuario._id, nombre: usuario.nombre, correo: usuario.correo, foto:usuario.foto }
                 const token = jwtUtils.generateToken(userData);
                 res.json({ token });
@@ -23,7 +25,7 @@ class UsuarioController {
                 next(new AppError('Contraseña o correo incorrectos'), 401)
             }
         } catch (error) {
-            next(new AppError("Error al aurorizar al usuario" + error.message, 500))
+            next(new AppError("Error al aurorizar al usuario", 500))
         }
     }
 
@@ -35,6 +37,7 @@ class UsuarioController {
             }
 
             const usuarioData = req.body
+            usuarioData.password = encriptador.encriptar(usuarioData.password)
             const foto = req.file
             const usuario = await usuarioDAO.crearUsuario(usuarioData,foto);
             res.status(201).json(usuario)
@@ -52,6 +55,7 @@ class UsuarioController {
             if (!usuario) {
                 next(new AppError('Usuario no encontrado'), 404)
             }
+            usuario.password=encriptador.desencriptar(usuario.password)
             res.status(200).json(usuario)
 
         } catch (error) {
@@ -113,6 +117,9 @@ class UsuarioController {
             }
 
             const usuarioData = req.body;
+            
+            if(usuarioData.password){usuarioData.password = encriptador.encriptar(usuarioData.password)}
+
             const usuario = await usuarioDAO.actualizarUsuario(id, usuarioData)
             if (!usuario) {
                 next(new AppError('Uusario no encontrado'))
