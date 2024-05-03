@@ -28,19 +28,6 @@ class UsuarioController {
     }
 
     static async crearUsuario(req, res, next) {
-        // try {
-        //     const { nombre, password, correo } = req.body;
-        //     if (!nombre, !password, !correo) {
-        //         next(new AppError('Los campos nombre, password y correo son requeridos'))
-        //     }
-
-        //     const usuarioData = req.body
-        //     const usuario = await usuarioDAO.crearUsuario(usuarioData);
-        //     res.status(201).json(usuario)
-
-        // } catch (error) {
-        //     next(new AppError('Error al crear el usuario', 500))
-        // }
         try {
             const { nombre, password, correo } = req.body;
             if (!nombre, !password, !correo) {
@@ -139,27 +126,30 @@ class UsuarioController {
 
     static async actualizarFoto(req, res, next) {
         try {
-            const id = req.params.id
-
-            const usuarioExist = await usuarioDAO.obtenerUsuarioPorId(id)
-
+            const id = req.params.id;
+    
+            const usuarioExist = await usuarioDAO.obtenerUsuarioPorId(id);
+    
             if (!usuarioExist) {
-                next(new AppError('Usuario no encontrado', 404))
+                return next(new AppError('Usuario no encontrado', 404));
             }
-
-            const { foto } = req.body;
-            if (foto) {
-                const usuario = await usuarioDAO.actualizarFoto(id, foto)
-                if (!usuario) {
-                    next(new AppError('Usuario no encontrado'))
-                }
-                res.status(200).json(usuario)
+    
+            const foto = req.file;
+            if (!foto) {
+                return next(new AppError('No se proporcionó una foto válida', 400));
             }
-
+    
+            const usuario = await usuarioDAO.actualizarFoto(id, foto);
+            if (!usuario) {
+                return next(new AppError('No se pudo actualizar la foto del usuario'+error.message, 500));
+            }
+    
+            res.status(200).json(usuario);
         } catch (error) {
-            next(new AppError('Error al actualizar foto del usuario', 500))
+            next(new AppError('Error al actualizar foto del usuario: ' + error.message, 500));
         }
     }
+    
 
     static async actualizarRating(req, res, next) {
         try {

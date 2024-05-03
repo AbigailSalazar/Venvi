@@ -12,8 +12,8 @@ class UsuarioDAO {
             const usuario = new Usuario(usuarioData);
             const newUser = await usuario.save();
             if (foto) {
-                const fotoURL = await multimediaDAO.agregarImgUsuario(newUser._id, foto); // guardar imagen de perfil si se registró correctamente
-                await this.actualizarFoto(newUser._id, fotoURL);
+               // const fotoURL = await multimediaDAO.agregarImgUsuario(newUser._id, foto); // guardar imagen de perfil si se registró correctamente
+                await this.actualizarFoto(newUser._id, foto);
             }
             return newUser;
         } catch (error) {
@@ -84,7 +84,10 @@ class UsuarioDAO {
 
     async actualizarFoto(id, nuevaFoto) {
         try {
-            return await Usuario.findByIdAndUpdate(id, { foto: nuevaFoto }, { new: true })
+            if (nuevaFoto) {
+                const fotoURL = await multimediaDAO.agregarImgUsuario(id, nuevaFoto); // guardar imagen de perfil si se registró correctamente
+                return await Usuario.findByIdAndUpdate(id, { foto: fotoURL }, { new: true })
+            }
         } catch (error) {
             throw error;
         }
