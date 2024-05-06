@@ -30,6 +30,16 @@ class DireccionDeEnvioDAO {
         }
     }
 
+    static async obtenerDireccionPorIdUsuario(usuario) {
+        try {
+            const direccion = await DireccionDeEnvio.findOne({idUsuario:usuario});
+            return direccion;
+        } catch (error) {
+            throw new Error('Error al obtener la dirección de envío: ' + error.message);
+        }
+    }
+
+
     // Método para actualizar una dirección de envío por su ID
     static async actualizarDireccion(direccionId, calle, numero, estado, ciudad, codigoPostal, pais) {
         try {

@@ -5,7 +5,7 @@ const direccionDeEnvioController = require('../Controllers/DireccionDeEnvioContr
 
 // Rutas para la entidad Dirección de Envío
 router.post('/',jwtUtils.verifyToken, direccionDeEnvioController.crearDireccionDeEnvio);
-router.get('/:id', jwtUtils.verifyToken,direccionDeEnvioController.obtenerDireccionDeEnvio);
+router.get('/:id', jwtUtils.verifyTokenUser,direccionDeEnvioController.obtenerDireccionDeEnvioByUser);
 router.put('/:id',jwtUtils.verifyTokenUser, direccionDeEnvioController.actualizarDireccionDeEnvioByUser);
 router.delete('/:id',jwtUtils.verifyToken, direccionDeEnvioController.eliminarDireccionDeEnvio);
 

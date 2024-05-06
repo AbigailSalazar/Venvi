@@ -26,6 +26,20 @@ async function obtenerDireccionDeEnvio(req, res) {
     }
 }
 
+async function obtenerDireccionDeEnvioByUser(req, res) {
+    const idUsuario = req.params.id;
+    try {
+        const direccion = await DireccionDeEnvioDAO.obtenerDireccionPorIdUsuario(idUsuario);
+        if (!direccion) {
+            res.status(404).json({ message: 'Dirección de envío no encontrada' });
+        } else {
+            res.json(direccion);
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
 // Controlador para actualizar una dirección de envío por su ID
 async function actualizarDireccionDeEnvio(req, res) {
     const direccionId = req.params.id;
@@ -60,4 +74,4 @@ async function eliminarDireccionDeEnvio(req, res) {
     }
 }
 
-module.exports = { crearDireccionDeEnvio, obtenerDireccionDeEnvio, actualizarDireccionDeEnvio, eliminarDireccionDeEnvio,actualizarDireccionDeEnvioByUser };
+module.exports = { crearDireccionDeEnvio, obtenerDireccionDeEnvio,obtenerDireccionDeEnvioByUser, actualizarDireccionDeEnvio, eliminarDireccionDeEnvio,actualizarDireccionDeEnvioByUser };
