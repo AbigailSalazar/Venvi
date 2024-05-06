@@ -12,20 +12,20 @@ class UsuarioController {
             const usuario = await usuarioDAO.obtenerUsuarioPorCorreo(correo)
             const passwDesencriptado=encriptador.desencriptar(usuario.password)
             if (!usuario) {
-                next(new AppError('Contraseña o correo incorrectos'), 404)
+                res.status(401).json("Constraseña o correo incorrectos")
             }
             
             else if (passwDesencriptado === password) {
                 const userData = { id: usuario._id, nombre: usuario.nombre, correo: usuario.correo, foto:usuario.foto }
                 const token = jwtUtils.generateToken(userData);
-                res.json({ token });
+                res.status(200).json({ token });
 
             }
             else {
-                next(new AppError('Contraseña o correo incorrectos'), 401)
+                res.status(401).json("Constraseña o correo incorrectos")
             }
         } catch (error) {
-            next(new AppError("Error al aurorizar al usuario", 500))
+            next(new AppError("Error al autorizar al usuario", 500))
         }
     }
 
