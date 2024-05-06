@@ -1,4 +1,4 @@
-const DireccionDeEnvio = require('./direccionDeEnvioModel');
+const DireccionDeEnvio = require('../models/direccionDeEnvio');
 
 class DireccionDeEnvioDAO {
     // Método para crear una nueva dirección de envío
@@ -46,6 +46,16 @@ class DireccionDeEnvioDAO {
             await DireccionDeEnvio.findByIdAndDelete({ _id: direccionId });
         } catch (error) {
             throw new Error('Error al eliminar la dirección de envío: ' + error.message);
+        }
+    }
+
+    
+    static async actualizarDireccionByUser(usuario, calle, numero, estado, ciudad, codigoPostal, pais) {
+        try {
+            const direccion = await DireccionDeEnvio.findOneAndUpdate({idUsuario:usuario}, { calle, numero, estado, ciudad, codigoPostal, pais }, { new: true });
+            return direccion;
+        } catch (error) {
+            throw new Error('Error al actualizar la dirección de envío: ' + error.message);
         }
     }
 }

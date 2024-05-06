@@ -40,7 +40,7 @@ const verifyTokenUser = (req, res, next) => {
     }
     
     // Verificar que el ID del usuario en el JWT coincida con el ID proporcionado en la solicitud
-    if (user.id !== req.params.id) {
+    if (user.id !==req.params.id) {
       return res.status(403).json({ error: 'Acceso denegado: El ID del usuario en el token no coincide con el ID proporcionado' });
     }
 

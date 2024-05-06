@@ -1,4 +1,4 @@
-const DireccionDeEnvioDAO = require('../dataAccess/DireccionDeEnvio');
+const DireccionDeEnvioDAO = require('../dataAccess/direccionDeEnvioDAO');
 
 // Controlador para crear una nueva dirección de envío
 async function crearDireccionDeEnvio(req, res) {
@@ -38,6 +38,17 @@ async function actualizarDireccionDeEnvio(req, res) {
     }
 }
 
+async function actualizarDireccionDeEnvioByUser(req, res) {
+    const idUsuario = req.params.id;
+    const { calle, numero, estado, ciudad, codigoPostal, pais } = req.body;
+    try {
+        const direccionActualizada = await DireccionDeEnvioDAO.actualizarDireccionByUser(idUsuario, calle, numero, estado, ciudad, codigoPostal, pais);
+        res.json(direccionActualizada);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
 // Controlador para eliminar una dirección de envío por su ID
 async function eliminarDireccionDeEnvio(req, res) {
     const direccionId = req.params.id;
@@ -49,4 +60,4 @@ async function eliminarDireccionDeEnvio(req, res) {
     }
 }
 
-module.exports = { crearDireccionDeEnvio, obtenerDireccionDeEnvio, actualizarDireccionDeEnvio, eliminarDireccionDeEnvio };
+module.exports = { crearDireccionDeEnvio, obtenerDireccionDeEnvio, actualizarDireccionDeEnvio, eliminarDireccionDeEnvio,actualizarDireccionDeEnvioByUser };

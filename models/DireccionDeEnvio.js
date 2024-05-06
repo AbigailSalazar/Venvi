@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-export const direccionEnvioSchema = new mongoose.Schema({
+const direccionEnvioSchema = new mongoose.Schema({
   idUsuario: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Usuario'
@@ -14,4 +14,4 @@ export const direccionEnvioSchema = new mongoose.Schema({
 });
 
 
-module.exports = mongoose.model('DireccionDeEnvi0o', direccionEnvioSchema)
+module.exports = mongoose.model('DireccionDeEnvio', direccionEnvioSchema)

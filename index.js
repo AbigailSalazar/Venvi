@@ -11,7 +11,7 @@ const usuarioRouter = require('./routes/usuarioRouter')
 const bodyParser = require('body-parser');
 
 //const carritoRoutes = require('./routes/CarritoRoutes');
-//const direccionDeEnvioRoutes = require('./routes/DireccionDeEnvioRoutes');
+const direccionDeEnvioRoutes = require('./routes/DireccionDeEnvioRoutes');
 
 db.conectar();
 
@@ -24,7 +24,7 @@ app.use('/api/categorias', categoriaRouter)
 app.use('/api/productos', productoRouter)
 app.use('/api/usuarios', usuarioRouter)
 // app.use('/api', carritoRoutes);
-// app.use('/api', direccionDeEnvioRoutes);
+app.use('/api/direcciones', direccionDeEnvioRoutes);
 
 app.all('*', (res, req, next) => {
     const error = new AppError(`No se pudo acceder a la ruta: ${req.originalUrl} en el servicio web`)

@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const direccionDeEnvioController = require('./direccionDeEnvioController');
+const jwtUtils = require('../utils/jwt')
+const direccionDeEnvioController = require('../Controllers/DireccionDeEnvioController');
 
 // Rutas para la entidad Dirección de Envío
-router.post('/direcciones-envio', direccionDeEnvioController.crearDireccionDeEnvio);
-router.get('/direcciones-envio/:id', direccionDeEnvioController.obtenerDireccionDeEnvio);
-router.put('/direcciones-envio/:id', direccionDeEnvioController.actualizarDireccionDeEnvio);
-router.delete('/direcciones-envio/:id', direccionDeEnvioController.eliminarDireccionDeEnvio);
+router.post('/',jwtUtils.verifyToken, direccionDeEnvioController.crearDireccionDeEnvio);
+router.get('/:id', jwtUtils.verifyToken,direccionDeEnvioController.obtenerDireccionDeEnvio);
+router.put('/:id',jwtUtils.verifyTokenUser, direccionDeEnvioController.actualizarDireccionDeEnvioByUser);
+router.delete('/:id',jwtUtils.verifyToken, direccionDeEnvioController.eliminarDireccionDeEnvio);
 
 module.exports = router;
