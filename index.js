@@ -10,7 +10,7 @@ const categoriaRouter = require('./routes/categoriaProductoRouter')
 const usuarioRouter = require('./routes/usuarioRouter')
 const bodyParser = require('body-parser');
 
-//const carritoRoutes = require('./routes/CarritoRoutes');
+const carritoRoutes = require('./routes/CarritoRoutes');
 const direccionDeEnvioRoutes = require('./routes/DireccionDeEnvioRoutes');
 
 db.conectar();
@@ -23,7 +23,7 @@ app.use(cors())
 app.use('/api/categorias', categoriaRouter)
 app.use('/api/productos', productoRouter)
 app.use('/api/usuarios', usuarioRouter)
-// app.use('/api', carritoRoutes);
+app.use('/api/carritos', carritoRoutes);
 app.use('/api/direcciones', direccionDeEnvioRoutes);
 
 app.all('*', (res, req, next) => {

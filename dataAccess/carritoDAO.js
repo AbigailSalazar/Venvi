@@ -1,4 +1,4 @@
-const Carrito = require('./carritoModel');
+const Carrito = require('../models/Carrito');
 
 class CarritoDAO {
     // Método para crear un nuevo carrito
@@ -26,10 +26,51 @@ class CarritoDAO {
         }
     }
 
-    // Método para actualizar un carrito por su ID
-    static async actualizarCarrito(carritoId, total, productos) {
+       // Método para obtener un carrito por su ID usuario
+       static async obtenerCarritoPorIdUsuario(usuarioId) {
         try {
-            const carrito = await Carrito.findByIdAndUpdate(carritoId, { total, productos }, { new: true });
+            const carrito = await Carrito.findOne({idUsuario:usuarioId});
+            return carrito;
+        } catch (error) {
+            throw new Error('Error al obtener el carrito: ' + error.message);
+        }
+    }
+
+    // Método para actualizar un carrito por su ID
+    static async actualizarCarritoPorIdUsuario(usuarioId, total, productos) {
+        try {
+            const carrito = await Carrito.findOneAndUpdate({idUsuario:usuarioId}, { total, productos }, { new: true });
+            return carrito;
+        } catch (error) {
+            throw new Error('Error al actualizar el carrito: ' + error.message);
+        }
+    }
+
+      // Método para actualizar un carrito por ID de usuario
+      static async actualizarCarrito(usuarioId, total, productos) {
+        try {
+            const carrito = await Carrito.findByIdAndUpdate({idUsuario:usuarioId}, { total, productos }, { new: true });
+            return carrito;
+        } catch (error) {
+            throw new Error('Error al actualizar el carrito: ' + error.message);
+        }
+    }
+
+    static async agregarProductos(usuarioId,productos){
+        try {
+            const carrito = await Carrito.findOneAndUpdate({idUsuario:usuarioId}, { $push: { productos: { $each: productos } } }, { new: true });
+            return carrito;
+        } catch (error) {
+            throw new Error('Error al actualizar el carrito: ' + error.message);
+        }
+    }
+
+    static async eliminarPorductos(usuarioId,productosEliminar){
+        try {
+            const carrito = await Carrito.findOneAndUpdate(
+                {idUsuario:usuarioId},
+                { $pull: { productos: { _id: { $in: productosEliminar } } } }, 
+                { new: true });
             return carrito;
         } catch (error) {
             throw new Error('Error al actualizar el carrito: ' + error.message);

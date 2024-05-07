@@ -13,9 +13,9 @@ async function crearCarrito(req, res) {
 
 // Controlador para obtener un carrito por su ID
 async function obtenerCarrito(req, res) {
-    const carritoId = req.params.id;
+    const usuarioId = req.params.id;
     try {
-        const carrito = await CarritoDAO.obtenerCarritoPorId(carritoId);
+        const carrito = await CarritoDAO.obtenerCarritoPorIdUsuario(usuarioId);
         if (!carrito) {
             res.status(404).json({ message: 'Carrito no encontrado' });
         } else {
@@ -28,15 +28,40 @@ async function obtenerCarrito(req, res) {
 
 // Controlador para actualizar un carrito por su ID
 async function actualizarCarrito(req, res) {
-    const carritoId = req.params.id;
+    const usuarioId = req.params.id;
     const { total, productos } = req.body;
     try {
-        const carritoActualizado = await CarritoDAO.actualizarCarrito(carritoId, total, productos);
+        const carritoActualizado = await CarritoDAO.actualizarCarritoPorIdUsuario(usuarioId, total, productos);
         res.json(carritoActualizado);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 }
+
+// Controlador para actualizar un carrito por su ID
+async function agregarProductos(req, res) {
+    const usuarioId = req.params.id;
+    const {productos} = req.body;
+    try {
+        const carritoActualizado = await CarritoDAO.agregarProductos(usuarioId,productos);
+        res.json(carritoActualizado);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+// Controlador para actualizar un carrito por su ID
+async function eliminarProductos(req, res) {
+    const usuarioId = req.params.id;
+    const {productos} = req.body;
+    try {
+        const carritoActualizado = await CarritoDAO.eliminarPorductos(usuarioId,productos);
+        res.json(carritoActualizado);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
 
 // Controlador para eliminar un carrito por su ID
 async function eliminarCarrito(req, res) {
@@ -49,4 +74,4 @@ async function eliminarCarrito(req, res) {
     }
 }
 
-module.exports = { crearCarrito, obtenerCarrito, actualizarCarrito, eliminarCarrito };
+module.exports = { crearCarrito, obtenerCarrito, actualizarCarrito, eliminarCarrito,agregarProductos,eliminarProductos };
