@@ -71,10 +71,11 @@ class CarritoDAO {
 
     static async eliminarPorductos(usuarioId,productosEliminar){
         try {
-            const totalRestar = productos.reduce((total, producto) => total + (producto.precio*producto.cantidadDisponible), 0);
+            const idsProductosEliminar = productosEliminar.map(producto => producto.id);
+            const totalRestar = productosEliminar.reduce((total, producto) => total + (producto.precio*producto.cantidadDisponible), 0);
 
             const carrito = await Carrito.findOneAndUpdate({idUsuario:usuarioId},{
-                $pull: { productos: { _id: { $in: productosEliminar } } },
+                $pull: { productos: { _id: { $in: idsProductosEliminar } } },
                 $inc:  { total: -totalRestar }  }, 
                 { new: true });
             return carrito;
