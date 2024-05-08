@@ -58,9 +58,10 @@ class CarritoDAO {
 
     static async agregarProductos(usuarioId,productos){
         try {
+            const total = productos.reduce((total, producto) => total + (producto.precio*producto.cantidadDisponible), 0);
             const carrito = await Carrito.findOneAndUpdate({idUsuario:usuarioId},{
                 $push: { productos: { $each: productos } },
-                $inc: { total:productos.reduce((total, producto) => total + producto.precio, 0) }
+                $inc: { total:total }
             }, { new: true });
             return carrito;
         } catch (error) {
@@ -70,7 +71,7 @@ class CarritoDAO {
 
     static async eliminarPorductos(usuarioId,productosEliminar){
         try {
-            const totalRestar = productos.reduce((total, producto) => total + producto.precio, 0);
+            const totalRestar = productos.reduce((total, producto) => total + (producto.precio*producto.cantidadDisponible), 0);
 
             const carrito = await Carrito.findOneAndUpdate({idUsuario:usuarioId},{
                 $pull: { productos: { _id: { $in: productosEliminar } } },
