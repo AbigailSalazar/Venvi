@@ -58,7 +58,10 @@ class CarritoDAO {
 
     static async agregarProductos(usuarioId,productos){
         try {
-            const carrito = await Carrito.findOneAndUpdate({idUsuario:usuarioId}, { $push: { productos: { $each: productos } } }, { new: true });
+            const carrito = await Carrito.findOneAndUpdate({idUsuario:usuarioId},{
+                $push: { productos: { $each: productos } },
+                $inc: { total:productos.reduce((total, producto) => total + producto.precio, 0) }
+            }, { new: true });
             return carrito;
         } catch (error) {
             throw new Error('Error al actualizar el carrito: ' + error.message);
@@ -67,9 +70,11 @@ class CarritoDAO {
 
     static async eliminarPorductos(usuarioId,productosEliminar){
         try {
-            const carrito = await Carrito.findOneAndUpdate(
-                {idUsuario:usuarioId},
-                { $pull: { productos: { _id: { $in: productosEliminar } } } }, 
+            const totalRestar = productos.reduce((total, producto) => total + producto.precio, 0);
+
+            const carrito = await Carrito.findOneAndUpdate({idUsuario:usuarioId},{
+                $pull: { productos: { _id: { $in: productosEliminar } } },
+                $inc:  { total: -totalRestar }  }, 
                 { new: true });
             return carrito;
         } catch (error) {
