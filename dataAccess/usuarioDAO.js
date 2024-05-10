@@ -1,6 +1,5 @@
 const Usuario = require('../models/Usuario')
 const multimediaDAO = require('../dataAccess/multimediaDAO');
-const convertirImagen = require('../utils/convertirImagen');
 
 class UsuarioDAO {
     constructor() {

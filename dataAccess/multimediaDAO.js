@@ -1,7 +1,6 @@
 const firebaseApp = require('firebase/app');
 const { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } = require('firebase/storage');
 require('dotenv').config();
-const ConvertirImagen = require('../utils/convertirImagen.js');
 const { refFromURL } = require('firebase/database');
 
 class MultimediaDAO {
