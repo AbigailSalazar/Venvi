@@ -32,6 +32,9 @@ class ProductoDAO {
                 precio: {
                     $gte: min,
                     $lte: max
+                },
+                cantidadDisponible:{
+                    $gte:1
                 }
             })
         } catch (error) {
@@ -56,6 +59,7 @@ class ProductoDAO {
             let query = Producto.find();
 
             // Aplicar filtros
+            query.$where('cantidadDisponible').gte(1)
             if (nombre) {
                 const palabrasABuscarArray = nombre.split(' ')
                 const regex = new RegExp(palabrasABuscarArray.join('.*'), 'i');
@@ -70,7 +74,6 @@ class ProductoDAO {
             if (categoria) {
                 query = query.where('categorias').elemMatch({ nombre: categoria })
             }
-            // Agregar más filtros según tus necesidades
 
             const productos = await query.exec();
             return productos;
@@ -89,7 +92,10 @@ class ProductoDAO {
 
     async obtenerProductosPorCategoria(categoria) {
         try {
-            return await Producto.find({ "categorias.nombre": categoria })
+            return await Producto.find({ "categorias.nombre": categoria,
+            cantidadDisponible:{
+                $gte:1
+            } })
         } catch (error) {
             throw error
         }
@@ -97,7 +103,7 @@ class ProductoDAO {
 
     async obtenerProductos() {
         try {
-            return await Producto.find({})
+            return await Producto.find({cantidadDisponible:{$gte:1}})
         } catch (error) {
             throw error;
         }
@@ -136,7 +142,7 @@ class ProductoDAO {
 
             // Actualizar el producto en db
             return await Producto.findByIdAndUpdate(id, pullQuery, { new: true });
-    
+
         } catch (error) {
             throw error;
         }
@@ -150,11 +156,20 @@ class ProductoDAO {
         }
     }
 
-    async eliminarProductoPorId(id,fotos) {
+
+    async actualizarCantidad(id, cantidad) {
         try {
-            for (const foto of fotos) {
-                await multimediaDAO.deleteImg(foto)
-            }
+            return await Producto.findByIdAndUpdate(id, { $inc: { cantidadDisponible: cantidad } }, { new: true })
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async eliminarProductoPorId(id, fotos) {
+        try {
+                for (const foto of fotos) {
+                    await multimediaDAO.deleteImg(foto)
+                }
             return await Producto.findOneAndDelete({ _id: id })
         } catch (error) {
             throw error;
