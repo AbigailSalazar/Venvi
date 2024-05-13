@@ -1,8 +1,7 @@
 class Venta {
-    constructor(id, idUsuario, idProducto, cantidadProducto, fecha, subtotal, envio, total, iva, direccionEnvio){
+    constructor(id, idUsuario, cantidadProducto, fecha, subtotal, envio, total, iva, direccionEnvio,productos){
         this.id = id;
         this.idUsuario = idUsuario;
-        this.idProducto = idProducto;
         this.cantidadProducto = cantidadProducto;
         this.fecha = fecha;
         this.subtotal = subtotal;
@@ -10,6 +9,7 @@ class Venta {
         this.total = total;
         this.iva = iva;
         this.direccionEnvio = direccionEnvio;
+        this.productos=productos
     }
 }
 module.exports = Venta

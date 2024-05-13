@@ -1,3 +1,4 @@
+const { gte } = require('lodash');
 const Producto = require('../models/Producto');
 const multimediaDAO = require('./multimediaDAO');
 
@@ -56,10 +57,9 @@ class ProductoDAO {
     async obtenerProductosByFiltros(nombre, categoria, min, max) {
         try {
 
-            let query = Producto.find();
+            let query = Producto.find({cantidadDisponible:{$gte:1}});
 
             // Aplicar filtros
-            query.$where('cantidadDisponible').gte(1)
             if (nombre) {
                 const palabrasABuscarArray = nombre.split(' ')
                 const regex = new RegExp(palabrasABuscarArray.join('.*'), 'i');

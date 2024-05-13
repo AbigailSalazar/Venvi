@@ -129,7 +129,7 @@ static async obtenerPorductosPorFiltros(req, res, next) {
         res.status(200).json(productos)
 
     } catch (error) {
-        next(new AppError('Error al obtener productos', 500))
+        next(new AppError('Error al obtener productos'+error.message, 500))
     }
 }
     static async actualizarProducto(req, res, next) {
