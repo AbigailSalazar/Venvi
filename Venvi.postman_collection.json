@@ -1,0 +1,1317 @@
+{
+	"info": {
+		"_postman_id": "8fedc049-ea70-4604-9718-399e3e927074",
+		"name": "Venvi",
+		"description": "REST API para la tienda de productos usados, contiene las siguientes entidades:\n\n- Productos\n    \n- Usuarios\n    \n- Carrito\n    \n- Categoria producto\n    \n- Direccion de envio\n    \n- Venta",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27411482",
+		"_collection_link": "https://universal-crescent-200271.postman.co/workspace/venvi~cbea724a-edcc-48cf-b0e9-fb65079cb2e7/collection/27411482-8fedc049-ea70-4604-9718-399e3e927074?action=share&source=collection_link&creator=27411482"
+	},
+	"item": [
+		{
+			"name": "Productos",
+			"item": [
+				{
+					"name": "Crear producto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idVendedor\":\"662449373964eecfc7e385bb\",\r\n    \"nombre\":\"bicicleta\",\r\n    \"fotos\":[\"/img/link_ejemplo1.png\",\"/img/link_ejemplo2.png\"],\r\n    \"precio\":12000,\r\n    \"cantidadDisponible\":1,\r\n    \"descripcion\":\"seminuevo\"   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/productos",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"productos"
+							]
+						},
+						"description": "Crea un producto en la base de datos y devuelve el objeto creado"
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/productos/662b2ae06b012d4677fa1ca8",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"productos",
+								"662b2ae06b012d4677fa1ca8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por id vendedor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/productos/vendedores/65ecca7655f1634defd90876",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"productos",
+								"vendedores",
+								"65ecca7655f1634defd90876"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por nombre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/productos/search?nombre=amarillo&min=0&max=300&categoria=Celulares",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"productos",
+								"search"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "amarillo"
+								},
+								{
+									"key": "min",
+									"value": "0"
+								},
+								{
+									"key": "max",
+									"value": "300"
+								},
+								{
+									"key": "categoria",
+									"value": "Celulares"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por categoría",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/productos/categorias/electronicos",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"productos",
+								"categorias",
+								"electronicos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/productos",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por precio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/productos/filtros/precio/?min=0&max=5000",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"productos",
+								"filtros",
+								"precio",
+								""
+							],
+							"query": [
+								{
+									"key": "min",
+									"value": "0"
+								},
+								{
+									"key": "max",
+									"value": "5000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar por id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idVendedor\": \"65ecca7655f1634defd90876\",\r\n    \"nombre\": \"Platos de vidrio\",\r\n    \"fotos\": [\r\n        \"/img/link_ejemplo1.png\",\r\n        \"/img/link_ejemplo2.png\"\r\n    ],\r\n    \"precio\": 140,\r\n    \"cantidadDisponible\": 5,\r\n    \"_id\": \"65f891d03bdd34bb07195be0\",\r\n    \"categorias\": [\"platos\",\"vidrio\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/productos/65ecca7655f1634defd90876",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"productos",
+								"65ecca7655f1634defd90876"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar fotos",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fotos",
+									"type": "file",
+									"src": [
+										"/C:/Users/Andrea/Pictures/logo_animate.png",
+										"/C:/Users/Andrea/Pictures/miyo.png"
+									]
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/api/productos/662b11b687cab2586ef58f71/fotos",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"productos",
+								"662b11b687cab2586ef58f71",
+								"fotos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualiza Precio",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"precio\":5000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/productos/65ea57ce46fc14f8dee590c3/precio",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"productos",
+								"65ea57ce46fc14f8dee590c3",
+								"precio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar por id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/api/productos/65ea57ce46fc14f8dee590c3",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"productos",
+								"65ea57ce46fc14f8dee590c3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar fotos",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fotos\":[\"https://firebasestorage.googleapis.com/v0/b/venvi-3862c.appspot.com/o/images%2Fproductos%2F6632cdbf10ed9bccb43f2bb1%2Fvestido2.jpeg?alt=media&token=50c6cdb0-8ba8-4e98-ac87-2041ab361c04\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/productos/6632cdbf10ed9bccb43f2bb1/fotos",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"productos",
+								"6632cdbf10ed9bccb43f2bb1",
+								"fotos"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Peticiones para modificar los datos de productos en la tienda"
+		},
+		{
+			"name": "Categorias",
+			"item": [
+				{
+					"name": "Crear categoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Ropa para teens\",\r\n    \"descripcion\":\"ropa para teens de tallas varias\"\r\n}   ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/categorias",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener categorias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/categorias/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"categorias",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/categorias/65e6a04d507007efe3ab682b",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"categorias",
+								"65e6a04d507007efe3ab682b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por nombre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/categorias/search?nombre=Ropa%20de%20hombre",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"categorias",
+								"search"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "Ropa%20de%20hombre"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar por id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Ropa de hombre\",\r\n    \"descripcion\":\"Ropa de hombre de diferentes tallas y estilos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/categorias/65eca811ca34c112eb35caf5",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"categorias",
+								"65eca811ca34c112eb35caf5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar por id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/categorias/6629e2bc4f011f31e858fa37",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"categorias",
+								"6629e2bc4f011f31e858fa37"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Peticiones para modificar las categorias de los productos que se venden en la tienda"
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Autenticar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\":\"hola\",\r\n    \"correo\":\"mari@gmail.com\"   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/usuarios/autenticar",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"usuarios",
+								"autenticar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nombre",
+									"value": "hola",
+									"type": "text"
+								},
+								{
+									"key": "correo",
+									"value": "hola34@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "text"
+								},
+								{
+									"key": "foto",
+									"type": "file",
+									"src": "/C:/Users/Andrea/Pictures/descarga.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/api/usuarios",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"usuarios"
+							]
+						},
+						"description": "Crea un producto en la base de datos y devuelve el objeto creado"
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/api/usuarios/65f890453bdd34bb07195bcf",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"usuarios",
+								"65f890453bdd34bb07195bcf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por nombre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/usuarios/search?nombre=Andrea Salazar",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"usuarios",
+								"search"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "Andrea Salazar"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/usuarios",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener perfil por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/usuarios/perfil/66356e7d4c29e2434343257e",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"usuarios",
+								"perfil",
+								"66356e7d4c29e2434343257e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar por id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Andrea Abigail\",\r\n    \"correo\":\"andrea@gmail.com\"  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/usuarios/6639186718cad1e3aa014445/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"usuarios",
+								"6639186718cad1e3aa014445",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar fotos",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"foto\":\"img/LinkFotoActualizada8.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/usuarios/65ecca7655f1634defd90876/foto",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"usuarios",
+								"65ecca7655f1634defd90876",
+								"foto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar rating",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rating\":8.8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/usuarios/65ecca7655f1634defd90876/rating",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"usuarios",
+								"65ecca7655f1634defd90876",
+								"rating"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar por id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/api/usuarios/65f890453bdd34bb07195bcf",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"usuarios",
+								"65f890453bdd34bb07195bcf"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Peticiones para modificar los datos de usuarios en la tienda"
+		},
+		{
+			"name": "Direcciones",
+			"item": [
+				{
+					"name": "Crear dirección",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idUsuario\":\"6639186718cad1e3aa014445\",\r\n    \"calle\":\"calle de prueba\",\r\n    \"numero\":\"12345\",\r\n    \"estado\":\"Sonora\",\r\n    \"ciudad\":\"Obregon\",\r\n    \"codigoPostal\":\"3000\",\r\n    \"pais\":\"México\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/direcciones",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"direcciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar dirección",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"calle\":\"calle de prueba editada\",\r\n    \"numero\":\"12345\",\r\n    \"estado\":\"Sonora\",\r\n    \"ciudad\":\"Obregon\",\r\n    \"codigoPostal\":\"3000\",\r\n    \"pais\":\"México\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/direcciones/6639186718cad1e3aa014445",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"direcciones",
+								"6639186718cad1e3aa014445"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por id usuario",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/api/direcciones/6639186718cad1e3aa014445",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"direcciones",
+								"6639186718cad1e3aa014445"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Peticiones para modificar direcciones de usuarios en la tienda"
+		},
+		{
+			"name": "Carrito",
+			"item": [
+				{
+					"name": "Crear carrito",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idUsuario\":\"66356e7d4c29e2434343257e\",\r\n    \"total\":100,\r\n    \"productos\":[\r\n         {\r\n        \"_id\": \"6635763e8ba7c9b3111bad2b\",\r\n        \"idVendedor\": \"66356e7d4c29e2434343257e\",\r\n        \"nombre\": \"Audifonos Sony\",\r\n        \"fotos\": [\r\n            \"https://firebasestorage.googleapis.com/v0/b/venvi-3862c.appspot.com/o/images%2Fproductos%2F6635763e8ba7c9b3111bad2b%2Faudifonos.jpg?alt=media&token=ad722839-bf92-4b43-8c5e-0279f72fbfb6\"\r\n        ],\r\n        \"precio\": 3000,\r\n        \"cantidadDisponible\": 1,\r\n        \"descripcion\": \"Audifonos Modelo MEJSD3\",\r\n        \"categorias\": [\r\n            {\r\n                \"nombre\": \"electronicos\",\r\n                \"descripcion\": \"Electronicos\",\r\n                \"_id\": \"6632ac2089a1dc1244548528\"\r\n            },\r\n            {\r\n                \"nombre\": \"audifonos\",\r\n                \"descripcion\": \"Audifonos\",\r\n                \"_id\": \"6632ac2089a1dc124454852b\"\r\n            }\r\n        ],\r\n        \"__v\": 0\r\n    }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/carritos",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"carritos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por usuario",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/api/carritos/66356e7d4c29e2434343257e",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"carritos",
+								"66356e7d4c29e2434343257e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar por usuario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"total\":5000,\r\n    \"productos\":[\r\n         {\r\n        \"_id\": \"6635763e8ba7c9b3111bad2b\",\r\n        \"idVendedor\": \"66356e7d4c29e2434343257e\",\r\n        \"nombre\": \"Audifonos Sony\",\r\n        \"fotos\": [\r\n            \"https://firebasestorage.googleapis.com/v0/b/venvi-3862c.appspot.com/o/images%2Fproductos%2F6635763e8ba7c9b3111bad2b%2Faudifonos.jpg?alt=media&token=ad722839-bf92-4b43-8c5e-0279f72fbfb6\"\r\n        ],\r\n        \"precio\": 3000,\r\n        \"cantidadDisponible\": 1,\r\n        \"descripcion\": \"Audifonos Modelo MEJSD3\",\r\n        \"categorias\": [\r\n            {\r\n                \"nombre\": \"electronicos\",\r\n                \"descripcion\": \"Electronicos\",\r\n                \"_id\": \"6632ac2089a1dc1244548528\"\r\n            },\r\n            {\r\n                \"nombre\": \"audifonos\",\r\n                \"descripcion\": \"Audifonos\",\r\n                \"_id\": \"6632ac2089a1dc124454852b\"\r\n            }\r\n        ],\r\n        \"__v\": 0\r\n    }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/carritos/66356e7d4c29e2434343257e",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"carritos",
+								"66356e7d4c29e2434343257e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar productos",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productos\":[\r\n          {\r\n        \"_id\": \"6635795c7fd80a5211183802\",\r\n        \"idVendedor\": \"66356e7d4c29e2434343257e\",\r\n        \"nombre\": \"Juegos de mesa clásicos\",\r\n        \"fotos\": [\r\n            \"https://firebasestorage.googleapis.com/v0/b/venvi-3862c.appspot.com/o/images%2Fproductos%2F6635795c7fd80a5211183802%2Fdamas.jpeg?alt=media&token=42921622-d3d8-4872-9abc-16eed0433757\",\r\n            \"https://firebasestorage.googleapis.com/v0/b/venvi-3862c.appspot.com/o/images%2Fproductos%2F6635795c7fd80a5211183802%2Fajedrez.png?alt=media&token=70d99a9f-e94e-4d04-99e3-211174236679\",\r\n            \"https://firebasestorage.googleapis.com/v0/b/venvi-3862c.appspot.com/o/images%2Fproductos%2F6635795c7fd80a5211183802%2Fgo.jpeg?alt=media&token=05cf0537-4a2a-4e99-9643-fb11e96a8652\"\r\n        ],\r\n        \"precio\": 1000,\r\n        \"cantidadDisponible\": 3,\r\n        \"descripcion\": \"Go, Ajedrez, damas de madera\",\r\n        \"categorias\": [\r\n            {\r\n                \"nombre\": \"juegos de mesa\",\r\n                \"descripcion\": \"juegos de mesa\",\r\n                \"_id\": \"6632822f89a1dc12445482ee\"\r\n            },\r\n            {\r\n                \"nombre\": \"juegos\",\r\n                \"descripcion\": \"juegos\",\r\n                \"_id\": \"6632825f89a1dc124454830a\"\r\n            },\r\n            {\r\n                \"nombre\": \"juegos clasicos\",\r\n                \"descripcion\": \"juegos clasicos\",\r\n                \"_id\": \"66329d0889a1dc12445483e5\"\r\n            }\r\n        ],\r\n        \"__v\": 0\r\n    }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/carritos/66356e7d4c29e2434343257e/productos",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"carritos",
+								"66356e7d4c29e2434343257e",
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar productos",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productos\":[\r\n        \"6635763e8ba7c9b3111bad2b\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/carritos/66356e7d4c29e2434343257e/productos",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"carritos",
+								"66356e7d4c29e2434343257e",
+								"productos"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Peticiones para la el carrito de productos de un usuario"
+		},
+		{
+			"name": "Ventas",
+			"item": [
+				{
+					"name": "Crear venta",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idUsuario\":\"66356e7d4c29e2434343257e\",\r\n    \"subtotal\":100,\r\n    \"envio\":0,\r\n    \"total\":160,\r\n    \"iva\":60, \r\n    \"direccionEnvio\":\"66395dc41fb5737e53411d7c\",\r\n    \"productos\":[]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/ventas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ventas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener venta",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/api/ventas/663ec4e16401bd6f3681b7b2",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ventas",
+								"663ec4e16401bd6f3681b7b2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por usuario",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/api/ventas/usuario/6639186718cad1e3aa014445",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ventas",
+								"usuario",
+								"6639186718cad1e3aa014445"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por vendedor",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/api/ventas/vendedor/66356e7d4c29e2434343257e",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ventas",
+								"vendedor",
+								"66356e7d4c29e2434343257e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar por id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/api/ventas/663ec3df5d9b36500eb29fac",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ventas",
+								"663ec3df5d9b36500eb29fac"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar venta",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"663ec4e16401bd6f3681b7b2\",\r\n    \"idUsuario\": \"6639186718cad1e3aa014445\",\r\n    \"subtotal\": 5000,\r\n    \"envio\": 0,\r\n    \"iva\": 60,\r\n    \"direccionEnvio\": \"66395dc41fb5737e53411d7c\",\r\n    \"estado\": \"pendiente\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/ventas/663ec4e16401bd6f3681b7b2",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ventas",
+								"663ec4e16401bd6f3681b7b2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar estado",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"estado\":\"pendiente\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/ventas/663ec4e16401bd6f3681b7b2/estado",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ventas",
+								"663ec4e16401bd6f3681b7b2",
+								"estado"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Peticiones para modificar ventas de usuarios en la tienda"
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjQ0OTM3Mzk2NGVlY2ZjN2UzODViYiIsIm5vbWJyZSI6IlBhYmxvIiwiY29ycmVvIjoicGFibG9AZ21haWwuY29tIiwiaWF0IjoxNzEzNzMzOTUyLCJleHAiOjE3MTM3Mzc1NTJ9.1BEmA4hyL7vu2CwEP79zfMluLbL94yPjJ6Z82-2FfAo"
+		}
+	]
+}
